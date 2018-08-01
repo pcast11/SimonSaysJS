@@ -1,9 +1,17 @@
+
+// Global Variables
+
 var steps = [];
 var strict = false;
 var next = true;
 var currStep = 0;
 var player = false;
 var loopNum = 0;
+
+
+/**
+ * When HTML document is ready, establish button behavior
+ */
 $(document).ready(function() {
   $("#reset").click(function() {
     $("#reset").html("Reset");
@@ -21,6 +29,10 @@ $(document).ready(function() {
   });
 });
 
+
+/*
+ * Loop that goes through Simon's steps in game
+ */
 function myLoop() {
   setTimeout(function() {
     playButton(steps[currStep]);
@@ -33,6 +45,10 @@ function myLoop() {
   }, 1000);
 }
 
+
+/*
+ * Start round of game
+ */
 function simonSays() {
   player = false;
   currStep = 0;
@@ -47,6 +63,10 @@ function simonSays() {
   playTurn();
 }
 
+
+/**
+ * Fuction that prepares game for user's input
+ */
 function playTurn() {
   player = true;
   currStep = 0;
@@ -74,10 +94,10 @@ function playTurn() {
   });
 }
 
+/**
+ * Sets audible feedback for wrong step
+ */
 function wrong() {
-  /*
-  WRITE WRONG ANIMATION HERE
-  */
   console.log("wrong");
   document.getElementById("wrongBeep").play();
   if (strict) {
@@ -88,6 +108,10 @@ function wrong() {
   }
 }
 
+
+/**
+ * First part of animation for win
+ */
 function winLoop1() {
   setTimeout(function() {
     $("#green").css("box-shadow", "0 0 20px");
@@ -105,6 +129,9 @@ function winLoop1() {
   }, 500);
 }
 
+/**
+ * Second part of animation for win
+ */
 function winLoop2() {
   setTimeout(function() {
     $("#green").css("box-shadow", "none");
@@ -122,6 +149,10 @@ function winLoop2() {
   }, 500);
 }
 
+
+/**
+ * Win animation
+ */
 function win() {
   document.getElementById("winBeep").play();
   winLoop1();
@@ -129,6 +160,10 @@ function win() {
   setTimeout(reset, 4000);
 }
 
+
+/**
+ * Resets game to step 0
+ */
 function reset() {
   $("#green").css("box-shadow", "none");
   $("#green").css("background-color", "green");
@@ -145,6 +180,10 @@ function reset() {
   simonSays();
 }
 
+
+/**
+ * Behavior for pressing button in-game
+ */
 function playButton(num) {
   switch (num) {
     case 1:
